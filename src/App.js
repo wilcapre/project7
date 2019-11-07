@@ -32,13 +32,15 @@ class App extends Component {
     };
   }
     componentDidMount() {
-      this.setLoading(); 
+      this.setLoading(true); 
       let path = window.location.pathname 
       
-      if (path === '/') {
-        this.performSearch("nature");
-      } else {
+      if (path === "/") {
+        this.performSearch('nature');
+      } else if (path.startsWith("/search")) {        
         this.performSearch(path.slice(8))
+      } else {
+        this.setLoading(false); 
       }
       
     }
@@ -56,8 +58,8 @@ class App extends Component {
       });
     }
 
-    setLoading = () => {
-      this.setState({ isLoading: true}); 
+    setLoading = (boolean) => {
+      this.setState({ isLoading: boolean}); 
     }
 
 // app render
